@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Localite</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="new_here">New Here?</string>
+    <string name="counsumer">consumer</string>
+    <string name="provider">provider</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="phone_number">Phone number</string>
+    <string name="bussiness_type">Bussiness type</string>
+    <string name="comapany_name">Comapany name</string>
+    <string name="sign_me_up">Sign me up</string>
+
+</resources>
