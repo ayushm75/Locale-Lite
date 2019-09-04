@@ -9,15 +9,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,14 +25,17 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity{
+public class Provider_log_in extends AppCompatActivity {
 
-    EditText name , password;
+    EditText name;
+    EditText type;
+    EditText password;
     Button login;
-    TextView newUser;
+
     SharedPreferences sharedPreferences;
 
     String txtName;
+    String txttype;
     String txtpwd;
     String p;
 
@@ -46,44 +44,22 @@ public class MainActivity extends AppCompatActivity{
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_provider_log_in);
 
+        setSupportActionBar((androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar3));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        name = (EditText)findViewById(R.id.name);
-        password = (EditText)findViewById(R.id.password);
-        login = (Button)findViewById(R.id.login);
-        newUser  = (TextView)findViewById(R.id.newuser);
-
-        setSupportActionBar((androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar));
+        name = (EditText)findViewById(R.id.cname);
+        type = (EditText)findViewById(R.id.ctype);
+        password = (EditText)findViewById(R.id.cpwd);
+        login = (Button)findViewById(R.id.csignin);
 
         sharedPreferences = getSharedPreferences("Localite" , MODE_PRIVATE);
 
         dialog = new ProgressDialog(this);
-
-        if (sharedPreferences != null){
-            if (checkIfLoggedIn()){
-
-                String name = sharedPreferences.getString("Name" , null);
-
-                Intent intent = new Intent(MainActivity.this , Consumer_frontpage.class);
-                intent.putExtra("Username" , name);
-                startActivity(intent);
-                finish();
-            }
-        }
-
-        newUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ConsumerOrProvider c = new ConsumerOrProvider();
-                c.show(getSupportFragmentManager() , "123");
-            }
-        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -91,6 +67,7 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
 
                 txtName = name.getText().toString().trim();
+                txttype = type.getText().toString().trim();
                 txtpwd = password.getText().toString().trim();
 
                 MessageDigest digest = null;
@@ -103,64 +80,54 @@ public class MainActivity extends AppCompatActivity{
                 byte[] pp =  digest.digest(txtpwd.getBytes(StandardCharsets.UTF_8));
                 p= Arrays.toString(pp);
 
-                databaseReference = FirebaseDatabase.getInstance().getReference("Consumer");
+                databaseReference = FirebaseDatabase.getInstance().getReference("Provider");
 
 
                 dialog.setMessage("Logging user in");
                 dialog.setCancelable(false);
                 dialog.show();
 
-                login(txtName ,p);
+                login(txtName ,txttype ,p);
 
             }
         });
     }
 
-    public void getType(String a){
-
-        if (a.equals("Consumer")){
-            Intent intent = new Intent(MainActivity.this , ConsumerSignIn.class);
-            startActivity(intent);
-        }else{
-            Intent intent = new Intent(MainActivity.this , ProviderSignIn.class);
-            startActivity(intent);
-        }
-    }
-
-    public boolean checkIfLoggedIn(){
-
-        boolean check = sharedPreferences.getBoolean("LoggedIn" , false);
-
-        if (check){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public void login(final String a , final String b){
+    public void login(final String a ,final String t , final String b){
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    if (dataSnapshot.child(a).exists()){
+                if (dataSnapshot.child(t).exists()){
 
-                        Consumer c = dataSnapshot.child(a).getValue(Consumer.class);
+                    if (dataSnapshot.child(t).child(a).exists()){
+                        Provider c = dataSnapshot.child(t).child(a).getValue(Provider.class);
 
                         if (c.getPwd().equals(b)){
 
-                            Intent intent = new Intent(MainActivity.this , Consumer_frontpage.class);
+                            Intent intent = new Intent(Provider_log_in.this , Consumer_frontpage.class);
                             intent.putExtra("Username" , a);
                             dialog.dismiss();
                             startActivity(intent);
                             finish();
                         }else{
                             dialog.dismiss();
-                            Toast.makeText(MainActivity.this , "Password is wrong" , Toast.LENGTH_LONG).show();
+                            Toast.makeText(Provider_log_in.this , "Password is wrong" , Toast.LENGTH_LONG).show();
                             return;
                         }
+                    }else{
+
+                        dialog.dismiss();
+                        Toast.makeText(Provider_log_in.this , "Provider not registered" , Toast.LENGTH_LONG).show();
+                        return;
                     }
+                }else{
+
+                    dialog.dismiss();
+                    Toast.makeText(Provider_log_in.this , "Provider type not registered" , Toast.LENGTH_LONG).show();
+                    return;
+                }
 
             }
 
@@ -168,26 +135,11 @@ public class MainActivity extends AppCompatActivity{
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 dialog.dismiss();
-                Toast.makeText(MainActivity.this , "Something went wrong" , Toast.LENGTH_LONG).show();
+                Toast.makeText(Provider_log_in.this , "Something went wrong" , Toast.LENGTH_LONG).show();
                 return;
 
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.provider, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        Intent intent = new Intent(MainActivity.this , Provider_log_in.class);
-        startActivity(intent);
-
-        return true;
 
     }
 }

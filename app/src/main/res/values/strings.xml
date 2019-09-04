@@ -9,8 +9,12 @@
     <string name="email">Email</string>
     <string name="address">Address</string>
     <string name="phone_number">Phone number</string>
-    <string name="bussiness_type">Bussiness type</string>
     <string name="comapany_name">Comapany name</string>
     <string name="sign_me_up">Sign me up</string>
+    <string name="sign_out">Sign out</string>
+    <string name="show_chat_history">Show chat history</string>
+    <string name="bussiness_name">Bussiness Name</string>
+    <string name="bussiness_type">Bussiness type</string>
+    <string name="provider_sign_in">Provider sign in</string>
 
 </resources>

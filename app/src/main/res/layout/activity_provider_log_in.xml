@@ -4,21 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConsumerSignIn">
+    tools:context=".Provider_log_in">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Consumer sign in"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints"
+        app:title="@string/app_name"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -52,7 +50,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/type"
+                android:id="@+id/Type"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,89 +61,12 @@
                 app:layout_constraintVertical_bias="0.479">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ptype"
+                    android:id="@+id/ctype"
                     android:layout_width="245dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/bussiness_type"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/bname"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.479">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/bcname"
-                    android:layout_width="245dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/bussiness_name"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/addr"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.479">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/caddr"
-                    android:layout_width="245dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/address"
-                    android:inputType="phone"
+                    android:inputType="textPersonName"
                     android:maxLength="8"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.605">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cemail"
-                    android:layout_width="245dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/email"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phone"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.727">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cphone"
-                    android:layout_width="245dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/phone_number"
-                    android:maxLength="2"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -185,5 +106,4 @@
                 app:layout_constraintVertical_bias="0.34" />
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

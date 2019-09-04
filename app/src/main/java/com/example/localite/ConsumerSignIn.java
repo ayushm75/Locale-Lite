@@ -170,7 +170,7 @@ public class ConsumerSignIn extends AppCompatActivity {
         editor.putString("Name" , a);
         editor.putString("Password" , b);
         editor.putBoolean("LoggedIn" , false);
-        editor.putString("Type" , "Consumer");
+        editor.putBoolean("Consumer" , true);
         editor.commit();
     }
 }
