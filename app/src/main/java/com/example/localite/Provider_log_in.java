@@ -50,7 +50,6 @@ public class Provider_log_in extends AppCompatActivity {
         setContentView(R.layout.activity_provider_log_in);
 
         setSupportActionBar((androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar3));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         name = (EditText)findViewById(R.id.cname);
         type = (EditText)findViewById(R.id.ctype);

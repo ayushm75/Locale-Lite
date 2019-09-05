@@ -15,7 +15,7 @@ public class Provider {
 
     public Provider(){};
 
-    public Provider(String ownerName, String bussType, String bussinessName, String addr, String phone, String email, String pwd) {
+    public Provider(String ownerName, String bussType, String bussinessName, String addr, String phone, String email, String pwd, int upvotes, int downvotes, boolean isAuth) {
         this.ownerName = ownerName;
         this.bussType = bussType;
         this.bussinessName = bussinessName;
@@ -23,6 +23,9 @@ public class Provider {
         this.phone = phone;
         this.email = email;
         this.pwd = pwd;
+        this.upvotes = upvotes;
+        this.downvotes = downvotes;
+        this.isAuth = isAuth;
     }
 
     public String getOwnerName() {

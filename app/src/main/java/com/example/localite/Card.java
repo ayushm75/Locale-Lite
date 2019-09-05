@@ -4,6 +4,8 @@ public class Card {
 
     String type;
 
+    public Card(){};
+
     public Card(String type) {
         this.type = type;
     }

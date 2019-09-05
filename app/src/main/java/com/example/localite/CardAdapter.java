@@ -51,4 +51,10 @@ public class CardAdapter extends BaseAdapter {
 
         return view;
     }
+
+    public void newCard(Card card){
+
+        cardlist.add(card);
+        notifyDataSetChanged();
+    }
 }

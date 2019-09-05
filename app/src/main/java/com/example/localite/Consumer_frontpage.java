@@ -8,10 +8,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Consumer_frontpage extends AppCompatActivity {
 
@@ -20,6 +28,10 @@ public class Consumer_frontpage extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+    CardAdapter c1;
+
+    ListView cl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +43,50 @@ public class Consumer_frontpage extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("Localite" , MODE_PRIVATE);
         isloggedin = sharedPreferences.getBoolean("LoggedIn" , false);
 
+        c1 = new CardAdapter(this);
+        cl = (ListView)findViewById(R.id.cardList);
+        cl.setAdapter(c1);
+
         if (!isloggedin)
             changeStatus();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Producer");
+        databaseReference = firebaseDatabase.getReference("Provider");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.hasChildren()){
+                    for (DataSnapshot ds : dataSnapshot.getChildren()){
+                        Card card = new Card(ds.getKey());
+                        c1.newCard(card);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        cl.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Card ctemp = (Card) c1.getItem(i);
+                String a = ctemp.getType();
+                if (a != null) {
+                    Toast.makeText(Consumer_frontpage.this , a , Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(Consumer_frontpage.this, Pro_list.class);
+                    intent.putExtra("Type", a);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(Consumer_frontpage.this , "String is empty" , Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+        });
     }
 
     public void changeStatus(){
@@ -88,4 +139,6 @@ public class Consumer_frontpage extends AppCompatActivity {
     public void bringupchat(){
 
     }
+
+
 }

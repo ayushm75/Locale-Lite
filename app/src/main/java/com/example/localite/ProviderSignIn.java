@@ -153,7 +153,7 @@ public class ProviderSignIn extends AppCompatActivity {
 
                 savePreferences(txtName ,p);
 
-                pr = new Provider(txtName , txtType , txtbName , txtAddr , txtPhone , txtEmail , p);
+                pr = new Provider(txtName , txtType , txtbName , txtAddr , txtPhone , txtEmail , p , 0 , 0 , false);
 
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

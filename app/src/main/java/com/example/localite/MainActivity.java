@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity{
 
         Intent intent = new Intent(MainActivity.this , Provider_log_in.class);
         startActivity(intent);
-
+        finish();
         return true;
 
     }
