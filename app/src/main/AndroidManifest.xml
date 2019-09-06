@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Pro_list"
-                  android:parentActivityName=".Consumer_frontpage"/>
+        <activity android:name=".ConsumerLogIn"></activity>
+        <activity
+            android:name=".Pro_list"
+            android:parentActivityName=".Consumer_frontpage" />
         <activity android:name=".Provider_log_in" />
         <activity android:name=".Consumer_frontpage" />
         <activity

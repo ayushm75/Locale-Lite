@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,8 +52,6 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         name = (EditText)findViewById(R.id.name);
         password = (EditText)findViewById(R.id.password);
@@ -102,6 +101,25 @@ public class MainActivity extends AppCompatActivity{
                 assert digest != null;
                 byte[] pp =  digest.digest(txtpwd.getBytes(StandardCharsets.UTF_8));
                 p= Arrays.toString(pp);
+
+                if (txtName.isEmpty()){
+                    name.setError("Name is empty!");
+                    name.requestFocus();
+                    return;
+                }
+
+                if (txtpwd.isEmpty()){
+                    password.setError("Password is empty!");
+                    password.requestFocus();
+                    return;
+                }
+
+                if (txtpwd.length()<6)
+                {
+                    password.setError("Enter at least 6 length password!");
+                    password.requestFocus();
+                    return;
+                }
 
                 databaseReference = FirebaseDatabase.getInstance().getReference("Consumer");
 
