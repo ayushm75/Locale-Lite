@@ -50,6 +50,8 @@ public class ProviderSignIn extends AppCompatActivity {
     String txtEmail;
     String txtPwd;
     String p;
+    double lat;
+    double lon;
 
     Provider pr;
 
@@ -153,7 +155,7 @@ public class ProviderSignIn extends AppCompatActivity {
 
                 savePreferences(txtName ,p);
 
-                pr = new Provider(txtName , txtType , txtbName , txtAddr , txtPhone , txtEmail , p , 0 , 0 , false);
+                pr = new Provider(txtName , txtType , txtbName , txtAddr , txtPhone , txtEmail , p , lat , lon , 0 , 0 , false);
 
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

@@ -33,12 +33,12 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity{
 
-    EditText name , password;
+    EditText phone , password;
     Button login;
     TextView newUser;
     SharedPreferences sharedPreferences;
 
-    String txtName;
+    String txtphone;
     String txtpwd;
     String p;
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        name = (EditText)findViewById(R.id.name);
+        phone = (EditText)findViewById(R.id.phone);
         password = (EditText)findViewById(R.id.password);
         login = (Button)findViewById(R.id.login);
         newUser  = (TextView)findViewById(R.id.newuser);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                txtName = name.getText().toString().trim();
+                txtphone = phone.getText().toString().trim();
                 txtpwd = password.getText().toString().trim();
 
                 MessageDigest digest = null;
@@ -102,9 +102,9 @@ public class MainActivity extends AppCompatActivity{
                 byte[] pp =  digest.digest(txtpwd.getBytes(StandardCharsets.UTF_8));
                 p= Arrays.toString(pp);
 
-                if (txtName.isEmpty()){
-                    name.setError("Name is empty!");
-                    name.requestFocus();
+                if (txtphone.isEmpty()){
+                    phone.setError("Name is empty!");
+                    phone.requestFocus();
                     return;
                 }
 
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity{
                 dialog.setCancelable(false);
                 dialog.show();
 
-                login(txtName ,p);
+                login(txtphone ,p);
 
             }
         });
@@ -204,7 +204,6 @@ public class MainActivity extends AppCompatActivity{
 
         Intent intent = new Intent(MainActivity.this , Provider_log_in.class);
         startActivity(intent);
-        finish();
         return true;
 
     }

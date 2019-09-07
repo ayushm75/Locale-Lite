@@ -9,7 +9,8 @@ public class Consumer {
     String email;
     String addr;
     String pwd;
-    LatLng latLng;
+    double lat;
+    double lon;
 
     public Consumer(){}
 
@@ -19,7 +20,16 @@ public class Consumer {
         this.email = email;
         this.addr = addr;
         this.pwd = pwd;
-        this.latLng = new LatLng(lat , lon);
+        this.lat = lat;
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLon() {
+        return lon;
     }
 
     public String getName() {

@@ -18,7 +18,8 @@
         <activity
             android:name=".Pro_list"
             android:parentActivityName=".Consumer_frontpage" />
-        <activity android:name=".Provider_log_in" />
+        <activity android:name=".Provider_log_in"
+                  android:parentActivityName=".MainActivity"/>
         <activity android:name=".Consumer_frontpage" />
         <activity
             android:name=".ProviderSignIn"
