@@ -2,6 +2,8 @@ package com.example.localite;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import androidx.fragment.app.DialogFragment;
 public class detail extends DialogFragment {
 
     String n;
+    Context c;
 
     @NonNull
     @Override
@@ -31,13 +34,22 @@ public class detail extends DialogFragment {
         Button navigate = (Button)view.findViewById(R.id.navigate);
 
         builder.setView(view);
-
         b.setText(n);
+
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                   Intent intent = new Intent(c , Message.class);
+                   intent.putExtra("provider name" , n);
+                   c.startActivity(intent);
+            }
+        });
 
         return builder.create();
     }
 
-    public void getName(String a){
+    public void getName(String a , Context c){
         n = a;
+        this.c = c;
     }
 }

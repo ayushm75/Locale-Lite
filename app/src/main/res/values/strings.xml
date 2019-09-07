@@ -22,5 +22,7 @@
     <string name="chat">Chat</string>
     <string name="navigate">Navigate</string>
     <string name="pay">Pay</string>
+    <string name="text_here">Text here</string>
+    <string name="send">Send</string>
 
 </resources>

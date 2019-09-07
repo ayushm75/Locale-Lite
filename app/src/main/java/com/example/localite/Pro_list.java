@@ -62,7 +62,7 @@ public class Pro_list extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Provider p = (Provider) pa.getItem(i);
                 detail d = new detail();
-                d.getName(p.getOwnerName());
+                d.getName(p.getOwnerName() , Pro_list.this);
                 d.show(getSupportFragmentManager() , "123");
             }
         });

@@ -50,6 +50,9 @@ public class ConsumerSignIn extends AppCompatActivity {
     String txtPwd;
     String p;
 
+    double lat;
+    double lon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,7 +137,7 @@ public class ConsumerSignIn extends AppCompatActivity {
 
                 savePreferences(txtName ,p);
 
-                c = new Consumer(txtName , txtPhone , txtEmail , txtAddr , p);
+                c = new Consumer(txtName , txtPhone , txtEmail , txtAddr , p , lat , lon);
 
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
