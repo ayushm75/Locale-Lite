@@ -114,13 +114,15 @@ public class chat extends AppCompatActivity {
                 String day = timestamp.substring(0, 10);
                 String time = timestamp.substring(11 , 19);
 
+                String concatenated = n + "," + m;
+
                 if (!txt.isEmpty()) {
                     m1.setConmsg(txt);
                     m1.setDay(day);
                     m1.setTime(time);
                     rv.setAdapter(mm);
                     mm.addmsg(m1);
-                    databaseReference.child(c).child(m).child(String.valueOf(d)).setValue(m1);
+                    databaseReference.child(c).child(concatenated).child(String.valueOf(d)).setValue(m1);
                 } else {
                     Toast.makeText(chat.this, "Enter some text", Toast.LENGTH_SHORT).show();
                 }

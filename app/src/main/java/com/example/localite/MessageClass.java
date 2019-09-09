@@ -8,6 +8,7 @@ public class MessageClass {
 
     String day , time;
 
+
     public MessageClass() {
     }
 

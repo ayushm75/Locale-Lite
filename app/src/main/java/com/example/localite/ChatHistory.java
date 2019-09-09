@@ -1,0 +1,94 @@
+package com.example.localite;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class ChatHistory extends AppCompatActivity {
+
+    RecyclerView rv;
+    LinearLayoutManager llm;
+    historyadapter ha;
+
+    String c , n , m;
+
+    DatabaseReference databaseReference;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chat_history);
+
+        rv = (RecyclerView)findViewById(R.id.rv2);
+        llm = new LinearLayoutManager(this);
+        ha = new historyadapter();
+        rv.setLayoutManager(llm);
+        rv.setAdapter(ha);
+
+        SharedPreferences ref = getSharedPreferences("Localite", MODE_PRIVATE);
+        c = ref.getString("phone number of current user", null);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("ChatHistory");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.child(c).getChildren()){
+                    String nm = split_name(ds.getKey());
+                    //Toast.makeText(ChatHistory.this , nm , Toast.LENGTH_SHORT).show();
+                    ha.addname(nm);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        rv.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
+
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
+    }
+
+    public String split_name(String a){
+
+        int i = a.indexOf(",");
+        n = a.substring(0 , i);
+        m = a.substring(i+1);
+        return n;
+    }
+}

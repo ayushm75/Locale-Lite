@@ -3,22 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight=".7"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="TextView"
+            android:background="@drawable/day"
+            android:textSize="19sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="235dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/ac"
-        android:ems="10"
-        android:hint="@string/text_here"
-        android:inputType="textPersonName"
-        android:maxLength="5"
-        android:padding="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp" />
+        android:layout_weight=".3">
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="165dp"
+            android:layout_marginTop="45dp"
+            android:layout_toLeftOf="@+id/text"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/ac"
+            android:hint="@string/text_here"
+            android:inputType="text"
+            android:padding="20dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp" />
+
+    </RelativeLayout>
+
 </LinearLayout>

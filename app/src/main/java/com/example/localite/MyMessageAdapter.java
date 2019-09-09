@@ -1,5 +1,6 @@
 package com.example.localite;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,10 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.MyMe
     public void onBindViewHolder(@NonNull MyMessageHolder holder, int position) {
 
         String a = mymsg.get(position).getConmsg();
-        holder.mmsg.setText(a);
+        holder.mmsg.setText(Html.fromHtml( a+ " &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"));
+        //holder.mmsg.setText(a);
+        holder.day.setText(mymsg.get(position).getDay());
+        holder.time.setText(mymsg.get(position).getTime());
 
     }
 
@@ -46,11 +50,14 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.MyMe
     public class MyMessageHolder extends RecyclerView.ViewHolder{
 
         TextView mmsg;
+        TextView day , time;
 
         public MyMessageHolder(@NonNull View itemView) {
             super(itemView);
 
             mmsg = (TextView)itemView.findViewById(R.id.text);
+            day = (TextView)itemView.findViewById(R.id.day);
+            time = (TextView)itemView.findViewById(R.id.time);
         }
     }
 

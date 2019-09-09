@@ -148,6 +148,8 @@ public class Consumer_frontpage extends AppCompatActivity {
 
     public void bringupchat(){
 
+        Intent i = new Intent(Consumer_frontpage.this , ChatHistory.class);
+        startActivity(i);
     }
 
 

@@ -33,6 +33,8 @@ public class OtherMessageAdapter extends RecyclerView.Adapter<OtherMessageAdapte
 
         String a = omsg.get(position).getPromsg();
         holder.o.setText(a);
+        holder.day.setText(omsg.get(position).getDay());
+        holder.time.setText(omsg.get(position).getTime());
 
     }
 
@@ -44,11 +46,14 @@ public class OtherMessageAdapter extends RecyclerView.Adapter<OtherMessageAdapte
     public class OtherMessageHolder extends RecyclerView.ViewHolder{
 
         TextView o;
+        TextView day ,time;
 
         public OtherMessageHolder(@NonNull View itemView) {
             super(itemView);
 
             o = (TextView)itemView.findViewById(R.id.text);
+            day = (TextView)itemView.findViewById(R.id.day);
+            time = (TextView)itemView.findViewById(R.id.time);
         }
     }
 
