@@ -24,7 +24,7 @@ import java.util.Date;
 
 public class chat extends AppCompatActivity {
 
-    String n, m, c;
+    String n, m, c , cat;
 
     MessageClass m1;
 
@@ -47,6 +47,8 @@ public class chat extends AppCompatActivity {
         Intent intent = getIntent();
         n = intent.getStringExtra("provider name");
         m = intent.getStringExtra("provider number");
+
+        cat = n+","+m;
 
         rv = (RecyclerView) findViewById(R.id.rc);
         mm = new MyMessageAdapter();
@@ -74,7 +76,7 @@ public class chat extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot ds : dataSnapshot.child(c).child(m).getChildren()) {
+                for (DataSnapshot ds : dataSnapshot.child(c).child(cat).getChildren()) {
                     MessageClass mclass = ds.getValue(MessageClass.class);
 
                     if (!mclass.getConmsg().isEmpty()){

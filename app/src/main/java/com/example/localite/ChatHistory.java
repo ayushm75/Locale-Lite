@@ -33,7 +33,7 @@ public class ChatHistory extends AppCompatActivity {
 
         rv = (RecyclerView)findViewById(R.id.rv2);
         llm = new LinearLayoutManager(this);
-        ha = new historyadapter();
+        ha = new historyadapter(this);
         rv.setLayoutManager(llm);
         rv.setAdapter(ha);
 
@@ -49,36 +49,12 @@ public class ChatHistory extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.child(c).getChildren()){
                     String nm = split_name(ds.getKey());
                     //Toast.makeText(ChatHistory.this , nm , Toast.LENGTH_SHORT).show();
-                    ha.addname(nm);
+                    ha.addname(nm , m);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        rv.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
             }
         });
