@@ -183,7 +183,7 @@ public class ConsumerSignIn extends AppCompatActivity {
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.child(txtName).exists()){
+                        if (dataSnapshot.child(txtPhone).exists()){
 
                             Toast.makeText(getApplicationContext(),"User already registered!",Toast.LENGTH_LONG).show();
                             dialog.cancel();
