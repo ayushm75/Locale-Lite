@@ -32,6 +32,34 @@ public class Provider {
         this.isAuth = isAuth;
     }
 
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public void setUpvotes(int upvotes) {
+        this.upvotes = upvotes;
+    }
+
+    public void setDownvotes(int downvotes) {
+        this.downvotes = downvotes;
+    }
+
+    public void setAuth(boolean auth) {
+        isAuth = auth;
+    }
+
     public String getOwnerName() {
         return ownerName;
     }

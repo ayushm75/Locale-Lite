@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity{
             if (checkIfLoggedIn()){
 
                 String name = sharedPreferences.getString("Name" , null);
-
                 Intent intent = new Intent(MainActivity.this , Consumer_frontpage.class);
                 intent.putExtra("Username" , name);
                 startActivity(intent);
@@ -169,7 +168,8 @@ public class MainActivity extends AppCompatActivity{
                         if (c.getPwd().equals(b)){
 
                             Intent intent = new Intent(MainActivity.this , Consumer_frontpage.class);
-                            intent.putExtra("Username" , a);
+                            intent.putExtra("Username" , c.getName());
+                            intent.putExtra("phone number" , txtphone);
                             dialog.dismiss();
                             startActivity(intent);
                             finish();

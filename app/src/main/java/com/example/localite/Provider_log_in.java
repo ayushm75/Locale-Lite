@@ -27,14 +27,14 @@ import java.util.Arrays;
 
 public class Provider_log_in extends AppCompatActivity {
 
-    EditText name;
+    EditText phone;
     EditText type;
     EditText password;
     Button login;
 
     SharedPreferences sharedPreferences;
 
-    String txtName;
+    String txtphone;
     String txttype;
     String txtpwd;
     String p;
@@ -52,7 +52,7 @@ public class Provider_log_in extends AppCompatActivity {
         setSupportActionBar((androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar3));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        name = (EditText)findViewById(R.id.cname);
+        phone = (EditText)findViewById(R.id.phone);
         type = (EditText)findViewById(R.id.ctype);
         password = (EditText)findViewById(R.id.cpwd);
         login = (Button)findViewById(R.id.csignin);
@@ -66,7 +66,7 @@ public class Provider_log_in extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                txtName = name.getText().toString().trim();
+                txtphone = phone.getText().toString().trim();
                 txttype = type.getText().toString().trim();
                 txtpwd = password.getText().toString().trim();
 
@@ -80,6 +80,25 @@ public class Provider_log_in extends AppCompatActivity {
                 byte[] pp =  digest.digest(txtpwd.getBytes(StandardCharsets.UTF_8));
                 p= Arrays.toString(pp);
 
+                if (txtphone.isEmpty() && txtphone.length()<10){
+                    phone.setError("Enter correct phone number!");
+                    phone.requestFocus();
+                    return;
+                }
+
+                if (txtpwd.isEmpty()){
+                    password.setError("Password is empty!");
+                    password.requestFocus();
+                    return;
+                }
+
+                if (txtpwd.length()<6)
+                {
+                    password.setError("Enter at least 6 length password!");
+                    password.requestFocus();
+                    return;
+                }
+
                 databaseReference = FirebaseDatabase.getInstance().getReference("Provider");
 
 
@@ -87,7 +106,7 @@ public class Provider_log_in extends AppCompatActivity {
                 dialog.setCancelable(false);
                 dialog.show();
 
-                login(txtName ,txttype ,p);
+                login(txtphone ,txttype ,p);
 
             }
         });

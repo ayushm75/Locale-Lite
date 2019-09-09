@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,7 @@ import androidx.fragment.app.DialogFragment;
 
 public class detail extends DialogFragment {
 
-    String n;
+    String n , m;
     Context c;
 
     @NonNull
@@ -39,8 +40,9 @@ public class detail extends DialogFragment {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                   Intent intent = new Intent(c , Message.class);
+                   Intent intent = new Intent(c , com.example.localite.chat.class);
                    intent.putExtra("provider name" , n);
+                   intent.putExtra("provider number" , m);
                    c.startActivity(intent);
             }
         });
@@ -48,7 +50,8 @@ public class detail extends DialogFragment {
         return builder.create();
     }
 
-    public void getName(String a , Context c){
+    public void getName(String a , Context c , String b){
+        m = b;
         n = a;
         this.c = c;
     }

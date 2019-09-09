@@ -277,6 +277,7 @@ public class ConsumerSignIn extends AppCompatActivity {
         editor.putString("Name" , a);
         editor.putString("Password" , b);
         editor.putBoolean("LoggedIn" , false);
+        editor.putString("phone number of current user" , null);
         editor.putBoolean("Consumer" , true);
         editor.commit();
     }

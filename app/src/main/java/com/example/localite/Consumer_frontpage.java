@@ -33,12 +33,19 @@ public class Consumer_frontpage extends AppCompatActivity {
 
     ListView cl;
 
+    String p , n;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consumer_frontpage);
 
+        Intent i = getIntent();
+        n = i.getStringExtra("Username");
+        p = i.getStringExtra("phone number");
+
         setSupportActionBar((androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar2));
+        getSupportActionBar().setTitle(n);
 
         sharedPreferences = getSharedPreferences("Localite" , MODE_PRIVATE);
         isloggedin = sharedPreferences.getBoolean("LoggedIn" , false);
@@ -80,6 +87,7 @@ public class Consumer_frontpage extends AppCompatActivity {
                     Toast.makeText(Consumer_frontpage.this , a , Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(Consumer_frontpage.this, Pro_list.class);
                     intent.putExtra("Type", a);
+                    intent.putExtra("username" , n);
                     startActivity(intent);
                 }else{
                     Toast.makeText(Consumer_frontpage.this , "String is empty" , Toast.LENGTH_LONG).show();
@@ -93,6 +101,7 @@ public class Consumer_frontpage extends AppCompatActivity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("LoggedIn" , true);
+        editor.putString("phone number of current user" , p);
 
         if (editor.commit()){
             Toast.makeText(Consumer_frontpage.this , "Commit successful" , Toast.LENGTH_LONG).show();
@@ -129,6 +138,7 @@ public class Consumer_frontpage extends AppCompatActivity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("LoggedIn" , false);
+        editor.putString("phone number of current user" , null);
         editor.apply();
 
         Intent intent = new Intent(Consumer_frontpage.this , MainActivity.class);

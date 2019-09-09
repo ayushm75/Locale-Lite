@@ -98,15 +98,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.479">
+                app:layout_constraintVertical_bias="0.479"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/z"
+                app:endIconContentDescription="Get current location">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/caddr"
                     android:layout_width="245dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/address"
-                    android:inputType="phone"
-                    android:maxLength="8"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,7 +146,7 @@
                     android:layout_width="245dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone_number"
-                    android:maxLength="2"
+                    android:maxLength="10"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 

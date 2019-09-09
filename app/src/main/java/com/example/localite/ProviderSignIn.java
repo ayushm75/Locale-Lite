@@ -4,8 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -13,16 +18,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 public class ProviderSignIn extends AppCompatActivity {
 
@@ -55,6 +65,13 @@ public class ProviderSignIn extends AppCompatActivity {
 
     Provider pr;
 
+    TextInputLayout b ;
+
+    private GoogleMap mMap;
+    static private final int REQUEST_LOCATION_PERMISSION = 500;
+    LocationManager locationManager;
+    Location location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +88,22 @@ public class ProviderSignIn extends AppCompatActivity {
         email = (EditText)findViewById(R.id.cemail);
         pwd = (EditText)findViewById(R.id.cpwd);
         psignin = (Button)findViewById(R.id.csignin);
+        b = (TextInputLayout) findViewById(R.id.addr);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         dialog = new ProgressDialog(this);
+
+        b.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                location = getLastKnownLocation();
+                lat = location.getLatitude();
+                lon = location.getLongitude();
+                txtAddr = getaddr();
+                addr.setText(txtAddr);
+            }
+        });
 
         psignin.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -84,7 +113,9 @@ public class ProviderSignIn extends AppCompatActivity {
                 txtName = oName.getText().toString().trim();
                 txtType = type.getText().toString().trim();
                 txtbName = bName.getText().toString().trim();
-                txtAddr = addr.getText().toString().trim();
+                if (txtAddr == null) {
+                    txtAddr = addr.getText().toString().trim();
+                }
                 txtPhone = phone.getText().toString().trim();
                 txtEmail = email.getText().toString().trim();
                 txtPwd = pwd.getText().toString().trim();
@@ -155,6 +186,8 @@ public class ProviderSignIn extends AppCompatActivity {
 
                 savePreferences(txtName ,p);
 
+                getLatLon();
+
                 pr = new Provider(txtName , txtType , txtbName , txtAddr , txtPhone , txtEmail , p , lat , lon , 0 , 0 , false);
 
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -162,19 +195,19 @@ public class ProviderSignIn extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                           if (dataSnapshot.child(txtType).exists()){
-                              if (dataSnapshot.child(txtType).child(txtName).exists()){
+                              if (dataSnapshot.child(txtType).child(txtPhone).exists()){
 
                                   Toast.makeText(getApplicationContext(),"Provider already registered!",Toast.LENGTH_LONG).show();
                                   dialog.cancel();
                               }else{
-                                  databaseReference.child(txtType).child(txtName).setValue(pr);
+                                  databaseReference.child(txtType).child(txtPhone).setValue(pr);
                                   Toast.makeText(getApplicationContext(),"Registration Successful!",Toast.LENGTH_LONG).show();
                                   dialog.cancel();
                                   finish();
                               }
                           }else{
 
-                              databaseReference.child(txtType).child(txtName).setValue(pr);
+                              databaseReference.child(txtType).child(txtPhone).setValue(pr);
                               Toast.makeText(getApplicationContext(),"Registration Successful!",Toast.LENGTH_LONG).show();
                               dialog.cancel();
                               finish();
@@ -191,6 +224,68 @@ public class ProviderSignIn extends AppCompatActivity {
             }
         });
     }
+
+    public String getaddr(){
+
+        Geocoder geocoder;
+        List<Address> addresses = null;
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(lat, lon, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+        String city = addresses.get(0).getLocality();
+        String state = addresses.get(0).getAdminArea();
+        String country = addresses.get(0).getCountryName();
+        String postalCode = addresses.get(0).getPostalCode();
+        String knownName = addresses.get(0).getFeatureName();// Only if available else return NULL
+
+        String a = address+city+state+country+postalCode+knownName;
+
+        return a;
+    }
+
+    private Location getLastKnownLocation() {
+        locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            @SuppressLint("MissingPermission") Location l = locationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
+    }
+
+    public void getLatLon(){
+
+        Geocoder geocoder = new Geocoder(getApplicationContext());
+
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(txtAddr, 1);
+            if (addresses != null && addresses.size() > 0){
+                lat = addresses.get(0).getLatitude();
+                lon = addresses.get(0).getLongitude();
+            }else{
+                lat = 0;
+                lon = 0;
+                Toast.makeText(getApplicationContext() , "Can't get location" , Toast.LENGTH_LONG).show();
+                return;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void savePreferences(String a ,String b){
 
