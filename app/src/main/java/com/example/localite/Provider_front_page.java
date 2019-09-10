@@ -42,11 +42,11 @@ public class Provider_front_page extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar2));
         getSupportActionBar().setTitle(oname);
 
-        //tl = (TabLayout)findViewById(R.id.tl);
-        ////vp = (ViewPager)findViewById(R.id.vp);
-       // spa = new SectionPageAdapter(getSupportFragmentManager());
-       // vp.setAdapter(spa);
-       // tl.setupWithViewPager(vp);
+        tl = (TabLayout)findViewById(R.id.tl);
+        vp = (ViewPager)findViewById(R.id.vp);
+        spa = new SectionPageAdapter(getSupportFragmentManager());
+        vp.setAdapter(spa);
+        tl.setupWithViewPager(vp);
 
         sharedPreferences = getSharedPreferences("Localite" , MODE_PRIVATE);
         isloggedin = sharedPreferences.getBoolean("LoggedIn" , false);

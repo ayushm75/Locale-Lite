@@ -18,11 +18,11 @@ public class SectionPageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 
         switch(position){
-            case 1:
+            case 0:
                 Profile p = new Profile();
                 return p;
 
-            case 2:
+            case 1:
                 Chat_History ch = new Chat_History();
                 return ch;
 
@@ -41,10 +41,10 @@ public class SectionPageAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
 
         switch(position){
-            case 1:
+            case 0:
                 return "Profile";
 
-            case 2:
+            case 1:
                 return "Chat";
 
             default:
