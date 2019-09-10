@@ -24,11 +24,13 @@ import java.util.Date;
 
 public class chat extends AppCompatActivity {
 
-    String n, m, c , cat;
+    String n, m, c, j , cat;
 
     MessageClass m1;
 
     DatabaseReference databaseReference;
+
+    Boolean whoami;
 
     EditText msg;
     Button send;
@@ -69,6 +71,8 @@ public class chat extends AppCompatActivity {
 
         SharedPreferences ref = getSharedPreferences("Localite", MODE_PRIVATE);
         c = ref.getString("phone number of current user", null);
+        j = ref.getString("NameC" , null);
+        whoami = ref.getBoolean("Consumer" , false);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("ChatHistory");
 
@@ -79,14 +83,26 @@ public class chat extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.child(c).child(cat).getChildren()) {
                     MessageClass mclass = ds.getValue(MessageClass.class);
 
-                    if (!mclass.getConmsg().isEmpty()){
-                        //Toast.makeText(chat.this , mclass.getConmsg() , Toast.LENGTH_SHORT).show();
-                        rv.setAdapter(mm);
-                        mm.addmsg(mclass);
-                    }else if (!mclass.getPromsg().isEmpty()){
-                        //Toast.makeText(chat.this , mclass.getPromsg() , Toast.LENGTH_SHORT).show();
-                        rv.setAdapter(om);
-                        om.addmsg(mclass);
+                    if (whoami == true){
+                        if (!mclass.getConmsg().isEmpty()){
+                            //Toast.makeText(chat.this , mclass.getConmsg() , Toast.LENGTH_SHORT).show();
+                            rv.setAdapter(mm);
+                            mm.addmsg(mclass);
+                        }else if (!mclass.getPromsg().isEmpty()){
+                            //Toast.makeText(chat.this , mclass.getPromsg() , Toast.LENGTH_SHORT).show();
+                            rv.setAdapter(om);
+                            om.addmsg(mclass);
+                        }
+                    }else{
+                        if (!mclass.getConmsg().isEmpty()){
+                            //Toast.makeText(chat.this , mclass.getConmsg() , Toast.LENGTH_SHORT).show();
+                            rv.setAdapter(om);
+                            om.addmsg(mclass);
+                        }else if (!mclass.getPromsg().isEmpty()){
+                            //Toast.makeText(chat.this , mclass.getPromsg() , Toast.LENGTH_SHORT).show();
+                            rv.setAdapter(mm);
+                            mm.addmsg(mclass);
+                        }
                     }
                 }
             }
@@ -117,6 +133,7 @@ public class chat extends AppCompatActivity {
                 String time = timestamp.substring(11 , 19);
 
                 String concatenated = n + "," + m;
+                String concatenated2 = j+","+c;
 
                 if (!txt.isEmpty()) {
                     m1.setConmsg(txt);
@@ -125,6 +142,7 @@ public class chat extends AppCompatActivity {
                     rv.setAdapter(mm);
                     mm.addmsg(m1);
                     databaseReference.child(c).child(concatenated).child(String.valueOf(d)).setValue(m1);
+                    databaseReference.child(m).child(concatenated2).child(String.valueOf(d)).setValue(m1);
                 } else {
                     Toast.makeText(chat.this, "Enter some text", Toast.LENGTH_SHORT).show();
                 }

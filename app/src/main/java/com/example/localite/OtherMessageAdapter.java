@@ -31,10 +31,17 @@ public class OtherMessageAdapter extends RecyclerView.Adapter<OtherMessageAdapte
     @Override
     public void onBindViewHolder(@NonNull OtherMessageHolder holder, int position) {
 
-        String a = omsg.get(position).getPromsg();
-        holder.o.setText(a);
-        holder.day.setText(omsg.get(position).getDay());
-        holder.time.setText(omsg.get(position).getTime());
+        if (!omsg.get(position).getConmsg().isEmpty()){
+            String a = omsg.get(position).getConmsg();
+            holder.o.setText(a);
+            holder.day.setText(omsg.get(position).getDay());
+            holder.time.setText(omsg.get(position).getTime());
+        }else{
+            String a = omsg.get(position).getPromsg();
+            holder.o.setText(a);
+            holder.day.setText(omsg.get(position).getDay());
+            holder.time.setText(omsg.get(position).getTime());
+        }
 
     }
 

@@ -127,6 +127,8 @@ public class Provider_log_in extends AppCompatActivity {
 
                             Intent intent = new Intent(Provider_log_in.this , Provider_front_page.class);
                             intent.putExtra("Username" , c.getOwnerName());
+                            intent.putExtra("phone number" , txtphone);
+                            intent.putExtra("type" , t);
                             dialog.dismiss();
                             startActivity(intent);
                             finish();

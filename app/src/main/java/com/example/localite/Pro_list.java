@@ -92,8 +92,8 @@ public class Pro_list extends AppCompatActivity {
 
                 for (DataSnapshot ds : dataSnapshot.child(a).getChildren()){
                     Provider pp = ds.getValue(Provider.class);
-                    if (distance(pp.getLat() , pp.getLon() , lat ,lon) < 1)
-                       pa.newpro(pp);
+                    if (distance(pp.getLat() , pp.getLon() , lat ,lon) < 1 && pp.isAuth())
+                        pa.newpro(pp);
                 }
             }
 

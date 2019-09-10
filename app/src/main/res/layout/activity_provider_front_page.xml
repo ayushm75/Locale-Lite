@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,32 +12,234 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_weight=".31"
+        android:background="@drawable/profile"
+        android:elevation="4dp"
+        android:orientation="horizontal">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight=".7"
+            android:orientation="vertical">
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/history_pro_name"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="19sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="3dp"
+                    android:background="@drawable/phone"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/addr"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/addr"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="10dp"
+                    android:text="TextView" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="3dp"
+        android:layout_weight=".29"
+        android:background="@drawable/udlayout"
+        android:elevation="5dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/upvote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ud"
+                    android:gravity="center"
+                    android:text="Upvotes"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".3"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_weight=".5"
+                    app:srcCompat="@drawable/upvote" />
+
+                <TextView
+                    android:id="@+id/uno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textSize="21sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Downvotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/ud"
+                    android:gravity="center"
+                    android:text="Downvotes"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".3"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    app:srcCompat="@drawable/downvote" />
+
+                <TextView
+                    android:id="@+id/dno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textSize="21sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight=".25">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ask"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Monday" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="25dp"
+                android:text="Upload documents"
+                android:textSize="20sp" />
+        </LinearLayout>
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".7"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/upload"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tuesday" />
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="3dp"
+                android:text="upload"
+                android:onClick="upload"/>
+        </LinearLayout>
+    </LinearLayout>
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Wednesday" />
-        </com.google.android.material.tabs.TabLayout>
 
-    </androidx.viewpager.widget.ViewPager>
 </LinearLayout>

@@ -34,11 +34,17 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.MyMe
     @Override
     public void onBindViewHolder(@NonNull MyMessageHolder holder, int position) {
 
-        String a = mymsg.get(position).getConmsg();
-        holder.mmsg.setText(Html.fromHtml( a+ " &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"));
-        //holder.mmsg.setText(a);
-        holder.day.setText(mymsg.get(position).getDay());
-        holder.time.setText(mymsg.get(position).getTime());
+        if (!mymsg.get(position).getConmsg().isEmpty()){
+            String a = mymsg.get(position).getConmsg();
+            holder.mmsg.setText(a);
+            holder.day.setText(mymsg.get(position).getDay());
+            holder.time.setText(mymsg.get(position).getTime());
+        }else{
+            String a = mymsg.get(position).getPromsg();
+            holder.mmsg.setText(a);
+            holder.day.setText(mymsg.get(position).getDay());
+            holder.time.setText(mymsg.get(position).getTime());
+        }
 
     }
 
