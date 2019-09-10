@@ -55,7 +55,7 @@ public class Consumer_frontpage extends AppCompatActivity {
         cl.setAdapter(c1);
 
         if (!isloggedin)
-            changeStatus();
+            changeStatus(n);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Provider");
@@ -97,11 +97,14 @@ public class Consumer_frontpage extends AppCompatActivity {
         });
     }
 
-    public void changeStatus(){
+    public void changeStatus(String a){
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("LoggedIn" , true);
+        editor.putString("NameC" , a);
         editor.putString("phone number of current user" , p);
+        editor.putBoolean("Consumer" , true);
+        editor.commit();
 
         if (editor.commit()){
             Toast.makeText(Consumer_frontpage.this , "Commit successful" , Toast.LENGTH_LONG).show();
@@ -139,7 +142,8 @@ public class Consumer_frontpage extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("LoggedIn" , false);
         editor.putString("phone number of current user" , null);
-        editor.apply();
+        editor.putBoolean("Consumer" , false);
+        editor.commit();
 
         Intent intent = new Intent(Consumer_frontpage.this , MainActivity.class);
         startActivity(intent);

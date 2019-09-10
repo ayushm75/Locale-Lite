@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Provider_front_page"/>
         <activity android:name=".ChatHistory"
                   android:parentActivityName=".Consumer_frontpage"></activity>
         <activity

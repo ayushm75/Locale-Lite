@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity{
     String txtpwd;
     String p;
 
+    Consumer cc;
+
     ProgressDialog dialog;
 
     FirebaseDatabase firebaseDatabase;
@@ -67,11 +69,19 @@ public class MainActivity extends AppCompatActivity{
         if (sharedPreferences != null){
             if (checkIfLoggedIn()){
 
-                String name = sharedPreferences.getString("Name" , null);
-                Intent intent = new Intent(MainActivity.this , Consumer_frontpage.class);
-                intent.putExtra("Username" , name);
-                startActivity(intent);
-                finish();
+                if (sharedPreferences.getBoolean("Consumer" , false)){
+                    String name = sharedPreferences.getString("NameC" , null);
+                    Intent intent = new Intent(MainActivity.this , Consumer_frontpage.class);
+                    intent.putExtra("Username" , name);
+                    startActivity(intent);
+                    finish();
+                }else if(sharedPreferences.getBoolean("Provider" , false)){
+                    String name = sharedPreferences.getString("NameP" , null);
+                    Intent intent = new Intent(MainActivity.this , Provider_front_page.class);
+                    intent.putExtra("Username" , name);
+                    startActivity(intent);
+                    finish();
+                }
             }
         }
 
@@ -131,6 +141,15 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
+    }
+
+    public void savePreferences(String a ,String b){
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Localite" , MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("NameC" , a);
+        editor.putString("PasswordC" , b);
+        editor.commit();
     }
 
     public void getType(String a){
@@ -204,6 +223,7 @@ public class MainActivity extends AppCompatActivity{
 
         Intent intent = new Intent(MainActivity.this , Provider_log_in.class);
         startActivity(intent);
+        finish();
         return true;
 
     }

@@ -2,14 +2,18 @@ package com.example.localite;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -18,27 +22,46 @@ public class Provider_front_page extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     boolean isloggedin;
 
+    String oname;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+    TabLayout tl;
+    ViewPager vp;
+    SectionPageAdapter spa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider_front_page);
 
-        setSupportActionBar((androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar2));
+        Intent i = getIntent();
+        oname = i.getStringExtra("Username");
+
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar2));
+        getSupportActionBar().setTitle(oname);
+
+        //tl = (TabLayout)findViewById(R.id.tl);
+        ////vp = (ViewPager)findViewById(R.id.vp);
+       // spa = new SectionPageAdapter(getSupportFragmentManager());
+       // vp.setAdapter(spa);
+       // tl.setupWithViewPager(vp);
 
         sharedPreferences = getSharedPreferences("Localite" , MODE_PRIVATE);
         isloggedin = sharedPreferences.getBoolean("LoggedIn" , false);
 
         if (!isloggedin)
-            changeStatus();
+            changeStatus(oname);
     }
 
-    public void changeStatus(){
+    public void changeStatus(String a){
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("NameP" , a);
         editor.putBoolean("LoggedIn" , true);
+        editor.putBoolean("Provider" , true);
+        editor.commit();
 
         if (editor.commit()){
             Toast.makeText(Provider_front_page.this , "Commit successful" , Toast.LENGTH_LONG).show();

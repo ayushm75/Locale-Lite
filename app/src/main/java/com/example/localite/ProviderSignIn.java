@@ -291,10 +291,11 @@ public class ProviderSignIn extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("Localite" , MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("Name" , a);
-        editor.putString("Password" , b);
+        editor.putString("NameP" , a);
+        editor.putString("PasswordP" , b);
         editor.putBoolean("LoggedIn" , false);
-        editor.putBoolean("Provider" , true);
+        editor.putString("phone number of current user" , null);
+        editor.putBoolean("Provider" , false);
         editor.commit();
     }
 }

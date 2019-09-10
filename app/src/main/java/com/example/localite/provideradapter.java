@@ -7,16 +7,29 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class provideradapter extends BaseAdapter {
 
+    TextView name;
+    TextView addr;
+    TextView upvote;
+    TextView downvote;
+
     ArrayList<Provider> p;
     Context c;
+
+    DatabaseReference databaseReference;
+
+    Provider p1;
 
     public provideradapter(Context c){
         this.c = c;
         p = new ArrayList<Provider>();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Provider");
     }
 
     @Override
@@ -42,17 +55,35 @@ public class provideradapter extends BaseAdapter {
             LayoutInflater inflator = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflator.inflate(R.layout.procard , viewGroup , false);
 
-            TextView name = (TextView)view.findViewById(R.id.name);
-            TextView addr = (TextView)view.findViewById(R.id.addr);
-            TextView upvote = (TextView)view.findViewById(R.id.upvote);
-            TextView downvote = (TextView)view.findViewById(R.id.downvote);
+            name = (TextView)view.findViewById(R.id.name);
+            addr = (TextView)view.findViewById(R.id.addr);
+            upvote = (TextView)view.findViewById(R.id.upvote);
+            downvote = (TextView)view.findViewById(R.id.downvote);
 
-            Provider p1 = p.get(i);
+            p1 = p.get(i);
 
             name.setText(p1.getOwnerName());
             addr.setText(p1.addr);
-            upvote.setText("Upvotes:"+p1.getUpvotes());
-            downvote.setText("Downvotes:"+p1.getDownvotes());
+            upvote.setText(String.valueOf(p1.getUpvotes()));
+            downvote.setText(String.valueOf(p1.getDownvotes()));
+
+            upvote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    p1.upvotes++;
+                    upvote.setText(String.valueOf(p1.getUpvotes()));
+                    databaseReference.child(p1.bussType).child(p1.getPhone()).setValue(p1);
+                }
+            });
+
+            downvote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    p1.downvotes++;
+                    downvote.setText(String.valueOf(p1.getDownvotes()));
+                    databaseReference.child(p1.bussType).child(p1.getPhone()).setValue(p1);
+                }
+            });
         }
 
 

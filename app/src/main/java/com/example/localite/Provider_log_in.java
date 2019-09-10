@@ -125,8 +125,8 @@ public class Provider_log_in extends AppCompatActivity {
 
                         if (c.getPwd().equals(b)){
 
-                            Intent intent = new Intent(Provider_log_in.this , Consumer_frontpage.class);
-                            intent.putExtra("Username" , a);
+                            Intent intent = new Intent(Provider_log_in.this , Provider_front_page.class);
+                            intent.putExtra("Username" , c.getOwnerName());
                             dialog.dismiss();
                             startActivity(intent);
                             finish();
@@ -161,4 +161,6 @@ public class Provider_log_in extends AppCompatActivity {
         });
 
     }
+
+
 }

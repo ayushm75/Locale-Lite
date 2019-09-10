@@ -274,11 +274,12 @@ public class ConsumerSignIn extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("Localite" , MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("Name" , a);
-        editor.putString("Password" , b);
+        editor.putString("NameC" , a);
+        editor.putString("PasswordC" , b);
         editor.putBoolean("LoggedIn" , false);
         editor.putString("phone number of current user" , null);
-        editor.putBoolean("Consumer" , true);
+        editor.putBoolean("Consumer" , false);
+        editor.putBoolean("Provider" , false);
         editor.commit();
     }
 }

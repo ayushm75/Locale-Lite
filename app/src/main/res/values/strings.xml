@@ -24,5 +24,8 @@
     <string name="pay">Pay</string>
     <string name="text_here">Text here</string>
     <string name="send">Send</string>
+    <string name="title_activity_provider_front_page">activity_provider_front_page</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 
 </resources>

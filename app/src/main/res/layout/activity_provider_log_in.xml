@@ -45,7 +45,7 @@
                     android:id="@+id/phone"
                     android:layout_width="245dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/name"
+                    android:hint="@string/phone_number"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,7 +66,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/bussiness_type"
                     android:inputType="textPersonName"
-                    android:maxLength="8"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
