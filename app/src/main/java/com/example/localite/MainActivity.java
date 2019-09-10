@@ -130,17 +130,48 @@ public class MainActivity extends AppCompatActivity{
                     return;
                 }
 
-                databaseReference = FirebaseDatabase.getInstance().getReference("Consumer");
+                if (txtphone.charAt(0) == '#'){
+                    databaseReference = FirebaseDatabase.getInstance().getReference("Admin").child("info");
+                    dialog.setMessage("Logging user in");
+                    dialog.setCancelable(false);
+                    dialog.show();
 
+                    adminlogin(txtphone ,txtpwd);
 
-                dialog.setMessage("Logging user in");
-                dialog.setCancelable(false);
-                dialog.show();
+                }else{
+                    databaseReference = FirebaseDatabase.getInstance().getReference("Consumer");
+                    dialog.setMessage("Logging user in");
+                    dialog.setCancelable(false);
+                    dialog.show();
 
-                login(txtphone ,p);
+                    login(txtphone ,p);
+                }
+            }
+        });
+    }
+
+    private void adminlogin(String txtphone, final String pwd) {
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                AdminInfo ai = dataSnapshot.getValue(AdminInfo.class);
+                if (pwd.equals(ai.getuPwd())){
+
+                    Intent i = new Intent(MainActivity.this , Admin_front_page.class);
+                    dialog.dismiss();
+                    startActivity(i);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
     }
 
     public void savePreferences(String a ,String b){

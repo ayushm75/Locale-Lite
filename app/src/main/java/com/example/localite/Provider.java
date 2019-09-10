@@ -11,6 +11,7 @@ public class Provider {
     String pwd;
     double lat;
     double lon;
+    String mImageUri;
     int upvotes;
     int downvotes;
     boolean isAuth;
@@ -30,6 +31,14 @@ public class Provider {
         this.upvotes = upvotes;
         this.downvotes = downvotes;
         this.isAuth = isAuth;
+    }
+
+    public String getmImageUri() {
+        return mImageUri;
+    }
+
+    public void setmImageUri(String mImageUri) {
+        this.mImageUri = mImageUri;
     }
 
     public double getLat() {
