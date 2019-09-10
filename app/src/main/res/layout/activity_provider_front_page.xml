@@ -204,8 +204,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight=".25">
+        android:layout_weight=".25"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -236,8 +236,8 @@
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginRight="3dp"
-                android:text="upload"
-                android:onClick="upload"/>
+                android:onClick="upload"
+                android:text="upload" />
         </LinearLayout>
     </LinearLayout>
 

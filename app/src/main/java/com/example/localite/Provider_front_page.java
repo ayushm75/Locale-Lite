@@ -156,7 +156,7 @@ public class Provider_front_page extends AppCompatActivity {
 
     public void bringupchat(){
 
-        Intent i = new Intent(Provider_front_page.this , ChatHistory.class);
+        Intent i = new Intent(Provider_front_page.this , ChatHistoryP.class);
         startActivity(i);
     }
 

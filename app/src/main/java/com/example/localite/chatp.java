@@ -1,7 +1,6 @@
 package com.example.localite;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,8 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class chat extends AppCompatActivity {
-
+public class chatp extends AppCompatActivity {
     String n, m, c, j , cat;
 
     MessageClass m1;
@@ -44,7 +41,8 @@ public class chat extends AppCompatActivity {
     MyMessageAdapter mm;
     OtherMessageAdapter om;
 
-    ArrayList<MessageClass> messagelist = new ArrayList<MessageClass>();
+    ArrayList<MessageClass> mc = new ArrayList<MessageClass>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +50,18 @@ public class chat extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         Intent intent = getIntent();
-        n = intent.getStringExtra("provider name");
-        m = intent.getStringExtra("provider number");
+        n = intent.getStringExtra("consumer name");
+        m = intent.getStringExtra("consumer number");
 
         cat = n+","+m;
 
         rv = (RecyclerView) findViewById(R.id.rc);
-        mm = new MyMessageAdapter(messagelist);
-       // om = new OtherMessageAdapter();
+        //mm = new MyMessageAdapter(mc);
+        om = new OtherMessageAdapter(mc);
         LinearLayoutManager ml = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
         ml.setStackFromEnd(true);
         rv.setLayoutManager(ml);
-        rv.setAdapter(mm);
+        rv.setAdapter(om);
 
 
         setSupportActionBar((androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar5));
@@ -77,8 +75,8 @@ public class chat extends AppCompatActivity {
 
         SharedPreferences ref = getSharedPreferences("Localite", MODE_PRIVATE);
         c = ref.getString("phone number of current user", null);
-        j = ref.getString("NameC" , null);
-        whoami = ref.getBoolean("Consumer" , false);
+        j = ref.getString("NameP" , null);
+        //whoami = ref.getBoolean("Consumer" , false);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("ChatHistory");
 
@@ -92,15 +90,14 @@ public class chat extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot ds : dataSnapshot.child(c).child(cat).getChildren()) {
-
                     MessageClass mclass = ds.getValue(MessageClass.class);
-
-                    messagelist.add(mclass);
+                    mc.add(mclass);
 
                 }
 
-                mm.notifyDataSetChanged();
+                om.notifyDataSetChanged();
             }
 
             @Override
@@ -126,15 +123,17 @@ public class chat extends AppCompatActivity {
                 String concatenated2 = j+","+c;
 
                 if (!txt.isEmpty()) {
-                    m1.setConmsg(txt);
+
+                    m1.setPromsg(txt);
+                    //m1.setPromsg(null);
                     m1.setDay(day);
                     m1.setTime(time);
-                    messagelist.add(m1);
+                    mc.add(m1);
                     //mm.notifyDataSetChanged();
                     databaseReference.child(c).child(concatenated).child(String.valueOf(d)).setValue(m1);
                     databaseReference.child(m).child(concatenated2).child(String.valueOf(d)).setValue(m1);
                 } else {
-                    Toast.makeText(chat.this, "Enter some text", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(chatp.this, "Enter some text", Toast.LENGTH_SHORT).show();
                 }
 
                 msg.setText("");
@@ -142,3 +141,4 @@ public class chat extends AppCompatActivity {
         });
     }
 }
+

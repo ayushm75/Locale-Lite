@@ -27,37 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight=".3"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/ac"
-            android:ems="10"
-            android:hint="@string/text_here"
-            android:inputType="text"
-            android:maxEms="10"
-            android:padding="20dp"
-            android:maxLines="10"
-            android:maxLength="10"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp" />
-
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/text"
-            android:layout_marginTop="45dp"
-            android:layout_weight="1"
-            android:paddingLeft="10dp"
-            android:text="TextView" />
-    </RelativeLayout>
+        android:orientation="horizontal"/>
 
 </LinearLayout>

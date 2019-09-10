@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Provider_front_page"/>
-        <activity android:name=".ChatHistory"
-                  android:parentActivityName=".Consumer_frontpage"></activity>
+        <activity android:name=".ChatHistoryP"></activity>
+        <activity android:name=".chatp" />
+        <activity android:name=".Provider_front_page" />
+        <activity
+            android:name=".ChatHistory"
+            android:parentActivityName=".Consumer_frontpage" />
         <activity
             android:name=".chat"
             android:parentActivityName=".Pro_list" />
@@ -36,9 +39,9 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS.COARSE.LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS.COARSE.LOCATION" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

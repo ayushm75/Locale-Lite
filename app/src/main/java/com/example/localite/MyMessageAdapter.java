@@ -17,10 +17,32 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.MyMe
 
     ArrayList<MessageClass> mymsg;
 
-    public MyMessageAdapter(){
+    MessageClass m = new MessageClass();
 
-        mymsg = new ArrayList<MessageClass>();
+    TextView mmsg , smsg;
+    TextView day , timeS , timeR;
+
+    public MyMessageAdapter(ArrayList<MessageClass> mymsg){
+
+        this.mymsg = mymsg;
     }
+
+
+    public class MyMessageHolder extends RecyclerView.ViewHolder{
+
+
+        public MyMessageHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mmsg = (TextView)itemView.findViewById(R.id.text);
+            day = (TextView)itemView.findViewById(R.id.day);
+            timeR = (TextView)itemView.findViewById(R.id.time);
+            timeS = (TextView)itemView.findViewById(R.id.time2);
+            smsg = (TextView)itemView.findViewById(R.id.text3);
+        }
+    }
+
+
     @NonNull
     @Override
     public MyMessageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,18 +56,23 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.MyMe
     @Override
     public void onBindViewHolder(@NonNull MyMessageHolder holder, int position) {
 
-        if (!mymsg.get(position).getConmsg().isEmpty()){
-            String a = mymsg.get(position).getConmsg();
-            holder.mmsg.setText(a);
-            holder.day.setText(mymsg.get(position).getDay());
-            holder.time.setText(mymsg.get(position).getTime());
-        }else{
-            String a = mymsg.get(position).getPromsg();
-            holder.mmsg.setText(a);
-            holder.day.setText(mymsg.get(position).getDay());
-            holder.time.setText(mymsg.get(position).getTime());
-        }
+          m = mymsg.get(position);
 
+          String gg = m.getConmsg();
+
+          if (gg != null){
+              smsg.setVisibility(View.INVISIBLE);
+              timeS.setVisibility(View.INVISIBLE);
+              mmsg.setText(gg);
+              day.setText(m.getDay());
+              timeR.setText(m.getTime());
+          }else{
+              mmsg.setVisibility(View.INVISIBLE);
+              timeR.setVisibility(View.INVISIBLE);
+              smsg.setText(m.getPromsg());
+              day.setText(m.getDay());
+              timeS.setText(m.getTime());
+          }
     }
 
     @Override
@@ -53,22 +80,4 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.MyMe
         return mymsg.size();
     }
 
-    public class MyMessageHolder extends RecyclerView.ViewHolder{
-
-        TextView mmsg;
-        TextView day , time;
-
-        public MyMessageHolder(@NonNull View itemView) {
-            super(itemView);
-
-            mmsg = (TextView)itemView.findViewById(R.id.text);
-            day = (TextView)itemView.findViewById(R.id.day);
-            time = (TextView)itemView.findViewById(R.id.time);
-        }
-    }
-
-    public void addmsg(MessageClass m1){
-        mymsg.add(m1);
-        notifyDataSetChanged();
-    }
 }
