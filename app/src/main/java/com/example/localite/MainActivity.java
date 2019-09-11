@@ -130,8 +130,8 @@ public class MainActivity extends AppCompatActivity{
                     return;
                 }
 
-                if (txtphone.charAt(0) == '#'){
-                    databaseReference = FirebaseDatabase.getInstance().getReference("Admin").child("info");
+                if (txtphone.charAt(0) == '!'){
+                    databaseReference = FirebaseDatabase.getInstance().getReference("Admin");
                     dialog.setMessage("Logging user in");
                     dialog.setCancelable(false);
                     dialog.show();
@@ -150,16 +150,17 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    private void adminlogin(String txtphone, final String pwd) {
+    private void adminlogin(final String txtphone, final String pwd) {
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                AdminInfo ai = dataSnapshot.getValue(AdminInfo.class);
-                if (pwd.equals(ai.getuPwd())){
+                AdminInfo ai = dataSnapshot.child(txtphone).getValue(AdminInfo.class);
+                if (txtpwd.equals(ai.getuPwd())){
 
                     Intent i = new Intent(MainActivity.this , Admin_front_page.class);
+                    i.putExtra("username" , txtphone);
                     dialog.dismiss();
                     startActivity(i);
                     finish();

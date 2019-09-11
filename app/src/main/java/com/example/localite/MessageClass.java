@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class MessageClass {
 
+    public static int  count =0;
+
     String me, promsg;
 
     String day , time;

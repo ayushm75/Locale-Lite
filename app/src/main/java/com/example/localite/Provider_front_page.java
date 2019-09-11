@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.PermissionChecker;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
@@ -95,6 +96,8 @@ public class Provider_front_page extends AppCompatActivity {
     private StorageReference mStorageref;
     private DatabaseReference databaseReference2;
 
+    ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,12 +111,14 @@ public class Provider_front_page extends AppCompatActivity {
         uv = (TextView)findViewById(R.id.uno);
         dv = (TextView)findViewById(R.id.dno);
 
+        dialog = new ProgressDialog(this);
+
         iv = (ImageView)findViewById(R.id.imageView6);
         mprogress = new ProgressBar(this);
 
         mStorageref = FirebaseStorage.getInstance().getReference("AuthProvider");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Admin");
-        ref2 = FirebaseDatabase.getInstance().getReference("Admin").child("Work");
+        databaseReference2 = FirebaseDatabase.getInstance().getReference("Admin");
+        ref2 = FirebaseDatabase.getInstance().getReference("AdminWork");
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar2));
         getSupportActionBar().setTitle(oname);
@@ -141,8 +146,8 @@ public class Provider_front_page extends AppCompatActivity {
                 phone = (TextView)findViewById(R.id.phone);
                 addr = (TextView)findViewById(R.id.addr);
                 name.setText(oname);
-                phone.setText("Phone No.:" + ophone);
-                addr.setText( "Address" + p.getAddr());
+                phone.setText("Phone No.: " + ophone);
+                addr.setText( "Address: " + p.getAddr());
                 uv.setText(String.valueOf(p.getUpvotes()));
                 dv.setText(String.valueOf(p.getDownvotes()));
             }
@@ -323,7 +328,11 @@ public class Provider_front_page extends AppCompatActivity {
 
         if (mImageUri != null){
 
-           final StorageReference ref = mStorageref.child(oname +"."+ getFileExtension(mImageUri));
+           final StorageReference ref = mStorageref.child(oname +".jpg");
+
+           dialog.setMessage("Uploading image");
+           dialog.setCancelable(false);
+           dialog.show();
 
            ref.putFile(mImageUri)
                    .continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -342,7 +351,8 @@ public class Provider_front_page extends AppCompatActivity {
                        Uri downUri = task.getResult();
                        p.setmImageUri(downUri.toString());
                        sendForAuthentication(p);
-                       Toast.makeText(Provider_front_page.this , "Successfully uploaded" , Toast.LENGTH_SHORT).show();
+                       dialog.dismiss();
+                       //Toast.makeText(Provider_front_page.this , "Successfully uploaded" , Toast.LENGTH_SHORT).show();
                    }
 
                }
@@ -355,14 +365,17 @@ public class Provider_front_page extends AppCompatActivity {
 
     private void sendForAuthentication(final Provider p) {
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                       AdminInfo ai = ds.getValue(AdminInfo.class);
-                    if (distance(p.getLat() , p.getLon() , ai.getLat() , ai.getLon()) < 5){
-                        ref2.child(ds.getKey()).setValue(p);
-                    }
+                      double x = distance(p.getLat() , p.getLon() , ai.getLat() , ai.getLon());
+                      Toast.makeText(Provider_front_page.this , ai.getuUsername() , Toast.LENGTH_LONG).show();
+                      if (x < 5){
+                          ref2.child(ds.getKey()).child(p.getPhone()+","+p.getOwnerName()).setValue(p);
+                      }
                 }
             }
 

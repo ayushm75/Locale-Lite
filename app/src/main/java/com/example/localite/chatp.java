@@ -110,6 +110,8 @@ public class chatp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                m1.count++;
+
                 txt = msg.getText().toString().trim();
 
                 Date d = Calendar.getInstance().getTime();
@@ -130,8 +132,8 @@ public class chatp extends AppCompatActivity {
                     m1.setTime(time);
                     mc.add(m1);
                     //mm.notifyDataSetChanged();
-                    databaseReference.child(c).child(concatenated).child(String.valueOf(d)).setValue(m1);
-                    databaseReference.child(m).child(concatenated2).child(String.valueOf(d)).setValue(m1);
+                    databaseReference.child(c).child(concatenated).child(String.valueOf(m1.count)).setValue(m1);
+                    databaseReference.child(m).child(concatenated2).child(String.valueOf(m1.count)).setValue(m1);
                 } else {
                     Toast.makeText(chatp.this, "Enter some text", Toast.LENGTH_SHORT).show();
                 }

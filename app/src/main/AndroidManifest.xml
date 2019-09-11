@@ -9,9 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Admin_front_page"></activity>
-        <activity android:name=".ChatHistoryP" />
-        <activity android:name=".chatp" />
+        <activity android:name=".deciding_place"
+                  android:parentActivityName=".Admin_front_page"/>
+        <activity android:name=".Admin_front_page" />
+        <activity
+            android:name=".ChatHistoryP"
+            android:parentActivityName=".Provider_front_page" />
+        <activity
+            android:name=".chatp"
+            android:parentActivityName=".ChatHistoryP" />
         <activity android:name=".Provider_front_page" />
         <activity
             android:name=".ChatHistory"
@@ -40,11 +46,12 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS.COARSE.LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.ACCESS.COARSE.LOCATION" />
+
 </manifest>

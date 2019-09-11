@@ -25,7 +25,7 @@
             android:id="@+id/phone"
             android:layout_width="245dp"
             android:layout_height="wrap_content"
-            android:inputType="phone"
+            android:inputType="textPostalAddress"
             android:hint="@string/phone_number"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
