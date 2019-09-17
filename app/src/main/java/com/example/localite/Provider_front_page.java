@@ -372,7 +372,7 @@ public class Provider_front_page extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                       AdminInfo ai = ds.getValue(AdminInfo.class);
                       double x = distance(p.getLat() , p.getLon() , ai.getLat() , ai.getLon());
-                      Toast.makeText(Provider_front_page.this , ai.getuUsername() , Toast.LENGTH_LONG).show();
+                      //Toast.makeText(Provider_front_page.this , ai.getuUsername() , Toast.LENGTH_LONG).show();
                       if (x < 5){
                           ref2.child(ds.getKey()).child(p.getPhone()+","+p.getOwnerName()).setValue(p);
                       }

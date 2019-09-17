@@ -14,10 +14,11 @@ import java.util.ArrayList;
 
 public class provideradapter extends BaseAdapter {
 
-    TextView name;
-    TextView addr;
-    TextView upvote;
-    TextView downvote;
+    private TextView name;
+    private TextView addr;
+    private TextView upvote;
+    private TextView downvote;
+    private TextView type;
 
     ArrayList<Provider> p;
     Context c;
@@ -59,13 +60,15 @@ public class provideradapter extends BaseAdapter {
             addr = (TextView)view.findViewById(R.id.addr);
             upvote = (TextView)view.findViewById(R.id.upvote);
             downvote = (TextView)view.findViewById(R.id.downvote);
+            type = (TextView)view.findViewById(R.id.type);
 
             p1 = p.get(i);
 
             name.setText(p1.getOwnerName());
-            addr.setText(p1.addr);
+            addr.setText(p1.getPhone());
             upvote.setText(String.valueOf(p1.getUpvotes()));
             downvote.setText(String.valueOf(p1.getDownvotes()));
+            type.setText(p1.getBussType());
 
             upvote.setOnClickListener(new View.OnClickListener() {
                 @Override

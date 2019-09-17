@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -67,6 +68,8 @@ public class ProviderSignIn extends AppCompatActivity {
 
     TextInputLayout b ;
 
+    RadioButton r1 , r2 , r3 , r4, r5, r6;
+
     private GoogleMap mMap;
     static private final int REQUEST_LOCATION_PERMISSION = 500;
     LocationManager locationManager;
@@ -90,6 +93,15 @@ public class ProviderSignIn extends AppCompatActivity {
         psignin = (Button)findViewById(R.id.csignin);
         b = (TextInputLayout) findViewById(R.id.addr);
 
+        r1 = (RadioButton)findViewById(R.id.doc);
+        r2 = (RadioButton)findViewById(R.id.phar);
+        r3 = (RadioButton)findViewById(R.id.elec);
+        r4 = (RadioButton)findViewById(R.id.plum);
+        r5 = (RadioButton)findViewById(R.id.carp);
+        r6 = (RadioButton)findViewById(R.id.others);
+
+        //type.setEnabled(false);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         dialog = new ProgressDialog(this);
@@ -104,6 +116,13 @@ public class ProviderSignIn extends AppCompatActivity {
                 addr.setText(txtAddr);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
 
         psignin.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -111,7 +130,6 @@ public class ProviderSignIn extends AppCompatActivity {
             public void onClick(View view) {
 
                 txtName = oName.getText().toString().trim();
-                txtType = type.getText().toString().trim();
                 txtbName = bName.getText().toString().trim();
                 if (txtAddr == null) {
                     txtAddr = addr.getText().toString().trim();
@@ -138,11 +156,28 @@ public class ProviderSignIn extends AppCompatActivity {
                     return;
                 }
 
-                if (txtType.isEmpty()){
+                if (r1.isChecked()){
+                    txtType = "Doctor";
+                }else if (r2.isChecked()){
+                    txtType = "Pharmacist";
+                }else if (r3.isChecked()){
+                    txtType = "Electrician";
+                }else if (r4.isChecked()){
+                    txtType = "Plumber";
+                }else if (r5.isChecked()){
+                    txtType = "Carpenter";
+                }else if (r6.isChecked()){
+                    //type.setEnabled(true);
+                    txtType = type.getText().toString().trim();
+                }
+
+                if (r6.isChecked() && txtType.isEmpty()){
                     type.setError("Bussiness name is empty!");
                     type.requestFocus();
                     return;
                 }
+
+
 
                 if (txtbName.isEmpty()){
                     bName.setError("Bussiness name is empty!");
@@ -194,24 +229,46 @@ public class ProviderSignIn extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                          if (dataSnapshot.child(txtType).exists()){
-                              if (dataSnapshot.child(txtType).child(txtPhone).exists()){
+                        if (txtType.equals("Doctor") || txtType.equals("Pharmacist") || txtType.equals("Electrician")
+                                || txtType.equals("Plumber") || txtType.equals("Carpenter")){
+                            if (dataSnapshot.child(txtType).exists()){
+                                if (dataSnapshot.child(txtType).child(txtPhone).exists()){
 
-                                  Toast.makeText(getApplicationContext(),"Provider already registered!",Toast.LENGTH_LONG).show();
-                                  dialog.cancel();
-                              }else{
-                                  databaseReference.child(txtType).child(txtPhone).setValue(pr);
-                                  Toast.makeText(getApplicationContext(),"Registration Successful!",Toast.LENGTH_LONG).show();
-                                  dialog.cancel();
-                                  finish();
-                              }
-                          }else{
+                                    Toast.makeText(getApplicationContext(),"Provider already registered!",Toast.LENGTH_LONG).show();
+                                    dialog.cancel();
+                                }else{
+                                    databaseReference.child(txtType).child(txtPhone).setValue(pr);
+                                    Toast.makeText(getApplicationContext(),"Registration Successful!",Toast.LENGTH_LONG).show();
+                                    dialog.cancel();
+                                    finish();
+                                }
+                            }else{
 
-                              databaseReference.child(txtType).child(txtPhone).setValue(pr);
-                              Toast.makeText(getApplicationContext(),"Registration Successful!",Toast.LENGTH_LONG).show();
-                              dialog.cancel();
-                              finish();
-                          }
+                                databaseReference.child(txtType).child(txtPhone).setValue(pr);
+                                Toast.makeText(getApplicationContext(),"Registration Successful!",Toast.LENGTH_LONG).show();
+                                dialog.cancel();
+                                finish();
+                            }
+                        }else{
+                            if (dataSnapshot.child("Others").exists()){
+                                if (dataSnapshot.child("Others").child(txtPhone).exists()){
+
+                                    Toast.makeText(getApplicationContext(),"Provider already registered!",Toast.LENGTH_LONG).show();
+                                    dialog.cancel();
+                                }else{
+                                    databaseReference.child("Others").child(txtPhone).setValue(pr);
+                                    Toast.makeText(getApplicationContext(),"Registration Successful!",Toast.LENGTH_LONG).show();
+                                    dialog.cancel();
+                                    finish();
+                                }
+                            }else{
+
+                                databaseReference.child("Others").child(txtPhone).setValue(pr);
+                                Toast.makeText(getApplicationContext(),"Registration Successful!",Toast.LENGTH_LONG).show();
+                                dialog.cancel();
+                                finish();
+                            }
+                        }
                     }
 
                     @Override

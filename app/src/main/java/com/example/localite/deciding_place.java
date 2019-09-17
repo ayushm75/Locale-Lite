@@ -145,6 +145,10 @@ public class deciding_place extends AppCompatActivity {
 
         databaseReference.child(uname).child(key).removeValue();
         p.setAuth(true);
-        databaseReference2.child(p.getBussType()).child(p.getPhone()).setValue(p);
+        if (p.getBussType().equals("Doctor") || p.getBussType().equals("Pharmacist") || p.getBussType().equals("Electrician")
+                || p.getBussType().equals("Plumber") || p.getBussType().equals("Carpenter"))
+             databaseReference2.child(p.getBussType()).child(p.getPhone()).setValue(p);
+        else
+            databaseReference2.child("Others").child(p.getPhone()).setValue(p);
     }
 }

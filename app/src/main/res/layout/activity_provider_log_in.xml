@@ -50,26 +50,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/Type"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.479">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ctype"
-                    android:layout_width="245dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/bussiness_type"
-                    android:inputType="textPersonName"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/pwd"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
@@ -89,6 +69,47 @@
                     android:inputType="textPassword"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:layout_width="244dp"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/doc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Doctor" />
+
+                <RadioButton
+                    android:id="@+id/phar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pharmacist" />
+
+                <RadioButton
+                    android:id="@+id/elec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Electrician" />
+
+                <RadioButton
+                    android:id="@+id/plum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Plumber" />
+
+                <RadioButton
+                    android:id="@+id/carp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Carpenter" />
+
+                <RadioButton
+                    android:id="@+id/others"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Others" />
+            </RadioGroup>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/csignin"

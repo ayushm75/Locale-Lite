@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +45,8 @@ public class Provider_log_in extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
+    RadioButton r1 , r2 , r3 , r4, r5, r6;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +56,16 @@ public class Provider_log_in extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         phone = (EditText)findViewById(R.id.phone);
-        type = (EditText)findViewById(R.id.ctype);
+        //type = (EditText)findViewById(R.id.ctype);
         password = (EditText)findViewById(R.id.cpwd);
         login = (Button)findViewById(R.id.csignin);
+
+        r1 = (RadioButton)findViewById(R.id.doc);
+        r2 = (RadioButton)findViewById(R.id.phar);
+        r3 = (RadioButton)findViewById(R.id.elec);
+        r4 = (RadioButton)findViewById(R.id.plum);
+        r5 = (RadioButton)findViewById(R.id.carp);
+        r6 = (RadioButton)findViewById(R.id.others);
 
         sharedPreferences = getSharedPreferences("Localite" , MODE_PRIVATE);
 
@@ -67,7 +77,7 @@ public class Provider_log_in extends AppCompatActivity {
             public void onClick(View view) {
 
                 txtphone = phone.getText().toString().trim();
-                txttype = type.getText().toString().trim();
+                //txttype = type.getText().toString().trim();
                 txtpwd = password.getText().toString().trim();
 
                 MessageDigest digest = null;
@@ -97,6 +107,21 @@ public class Provider_log_in extends AppCompatActivity {
                     password.setError("Enter at least 6 length password!");
                     password.requestFocus();
                     return;
+                }
+
+                if (r1.isChecked()){
+                    txttype = "Doctor";
+                }else if (r2.isChecked()){
+                    txttype = "Pharmacist";
+                }else if (r3.isChecked()){
+                    txttype = "Electrician";
+                }else if (r4.isChecked()){
+                    txttype = "Plumber";
+                }else if (r5.isChecked()){
+                    txttype = "Carpenter";
+                }else if (r6.isChecked()){
+                    //type.setEnabled(true);
+                    txttype = "Others";
                 }
 
                 databaseReference = FirebaseDatabase.getInstance().getReference("Provider");

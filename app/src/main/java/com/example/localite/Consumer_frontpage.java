@@ -2,6 +2,7 @@ package com.example.localite;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -29,30 +31,31 @@ public class Consumer_frontpage extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-    CardAdapter c1;
-
-    ListView cl;
-
     String p , n;
+
+    private CardView doc , elec , phar , plum , carp , others;
+    private TextView c;
+
+    boolean flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consumer_frontpage);
+        setContentView(R.layout.new_consumer_layout);
 
         Intent i = getIntent();
-        n = i.getStringExtra("Username");
+        //n = i.getStringExtra("Username");
         p = i.getStringExtra("phone number");
 
-        setSupportActionBar((androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar2));
-        getSupportActionBar().setTitle(n);
+        c = (TextView)findViewById(R.id.con_name);
+        c.setText(n);
+
+        setSupportActionBar((androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar10));
+        //getSupportActionBar().setTitle(n);
 
         sharedPreferences = getSharedPreferences("Localite" , MODE_PRIVATE);
         isloggedin = sharedPreferences.getBoolean("LoggedIn" , false);
-
-        c1 = new CardAdapter(this);
-        cl = (ListView)findViewById(R.id.cardList);
-        cl.setAdapter(c1);
+        n = sharedPreferences.getString("NameC" , " ");
 
         if (!isloggedin)
             changeStatus(n);
@@ -60,39 +63,179 @@ public class Consumer_frontpage extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Provider");
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        doc = (CardView)findViewById(R.id.doctor);
+        elec = (CardView)findViewById(R.id.electrician);
+        phar = (CardView)findViewById(R.id.pharmacy);
+        plum = (CardView)findViewById(R.id.pharmacy);
+        carp = (CardView)findViewById(R.id.carpenter);
+        others = (CardView)findViewById(R.id.others);
 
-                if (dataSnapshot.hasChildren()){
-                    for (DataSnapshot ds : dataSnapshot.getChildren()){
-                        Card card = new Card(ds.getKey());
-                        c1.newCard(card);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        doc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        //if (dataSnapshot.hasChild("Doctor")) {
+                            //Toast.makeText(Consumer_frontpage.this , "user of such type exists" , Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(Consumer_frontpage.this , Pro_list.class);
+                            i.putExtra("username" , n);
+                            i.putExtra("Type" , "Doctor");
+                            startActivity(i);
+                        /*}else{
+                            Toast.makeText(Consumer_frontpage.this , "No user of such type exists" , Toast.LENGTH_SHORT).show();
+                        }*/
+
                     }
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                    }
+                });
             }
         });
 
-        cl.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        phar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Card ctemp = (Card) c1.getItem(i);
-                String a = ctemp.getType();
-                if (a != null) {
-                    Toast.makeText(Consumer_frontpage.this , a , Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Consumer_frontpage.this, Pro_list.class);
-                    intent.putExtra("Type", a);
-                    intent.putExtra("username" , n);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(Consumer_frontpage.this , "String is empty" , Toast.LENGTH_LONG).show();
-                    return;
-                }
+            public void onClick(View view) {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        //if (dataSnapshot.hasChild("Pharmacist")) {
+                            //Toast.makeText(Consumer_frontpage.this , "user of such type exists" , Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(Consumer_frontpage.this , Pro_list.class);
+                            i.putExtra("username" , n);
+                            i.putExtra("Type" , "Pharmacist");
+                            startActivity(i);
+                        /*}else{
+                            Toast.makeText(Consumer_frontpage.this , "No user of such type exists" , Toast.LENGTH_SHORT).show();
+                        }*/
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        elec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        //if (dataSnapshot.hasChild("Electrician")) {
+                            //Toast.makeText(Consumer_frontpage.this , "user of such type exists" , Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(Consumer_frontpage.this , Pro_list.class);
+                            i.putExtra("username" , n);
+                            i.putExtra("Type" , "Electrician");
+                            startActivity(i);
+                        /*}else{
+                            Toast.makeText(Consumer_frontpage.this , "No user of such type exists" , Toast.LENGTH_SHORT).show();
+                        }*/
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        carp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        //if (dataSnapshot.hasChild("Carpenter")) {
+                            //Toast.makeText(Consumer_frontpage.this , "user of such type exists" , Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(Consumer_frontpage.this , Pro_list.class);
+                            i.putExtra("username" , n);
+                            i.putExtra("Type" , "Carpenter");
+                            startActivity(i);
+                        /*}else{
+                            Toast.makeText(Consumer_frontpage.this , "No user of such type exists" , Toast.LENGTH_SHORT).show();
+                        }*/
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        plum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        //if (dataSnapshot.hasChild("Plumber")) {
+                            //Toast.makeText(Consumer_frontpage.this , "user of such type exists" , Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(Consumer_frontpage.this , Pro_list.class);
+                            i.putExtra("username" , n);
+                            i.putExtra("Type" , "Plumber");
+                            startActivity(i);
+                        /*}else{
+                            Toast.makeText(Consumer_frontpage.this , "No user of such type exists" , Toast.LENGTH_SHORT).show();
+                        }*/
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        others.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        //if (dataSnapshot.hasChild("Others")) {
+                            //Toast.makeText(Consumer_frontpage.this , "user of such type exists" , Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(Consumer_frontpage.this , Pro_list.class);
+                            i.putExtra("username" , n);
+                            i.putExtra("Type" , "Others");
+                            startActivity(i);
+                        /*}else{
+                            Toast.makeText(Consumer_frontpage.this , "No user of such type exists" , Toast.LENGTH_SHORT).show();
+                        }*/
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
     }
