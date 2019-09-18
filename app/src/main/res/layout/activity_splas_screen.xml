@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/c"
+    tools:context=".splas_screen">
+
+    <TextView
+        android:id="@+id/Localite"
+        android:layout_width="228dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="LOCALITE"
+        android:textSize="45sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Localite"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Come , find your surroundings"
+        android:textSize="17sp" />
+
+</RelativeLayout>

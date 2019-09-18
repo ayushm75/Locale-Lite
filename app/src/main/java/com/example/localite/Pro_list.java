@@ -107,9 +107,9 @@ public class Pro_list extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Provider p = (Provider) pa.getItem(i);
-                Toast.makeText(Pro_list.this , p.getPhone() , Toast.LENGTH_LONG).show();
+                //Toast.makeText(Pro_list.this , p.getLat() + " " + p.getLon() , Toast.LENGTH_LONG).show();
                 detail d = new detail();
-                d.getName(p.getOwnerName() , Pro_list.this , p.getPhone());
+                d.getName(p.getOwnerName() , Pro_list.this , p.getPhone() , p.getBussType() ,  p.getLon() , p.getLat());
                 d.show(getSupportFragmentManager() , "123");
             }
         });
@@ -170,5 +170,11 @@ public class Pro_list extends AppCompatActivity {
         double dist = earthRadius * c;
 
         return dist;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //loadingDialog.dismiss();
     }
 }

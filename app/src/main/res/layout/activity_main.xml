@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/b6">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/cphone"
@@ -18,8 +19,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.253"
+        android:textColorHint="#B3AEAE"
         android:textColor="#ffffff"
-        android:backgroundTint="@color/cardview_dark_background">
+        android:backgroundTint="@color/cardview_dark_background"
+        app:boxBackgroundColor="@color/textcardColor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone"
@@ -38,8 +41,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="#B3AEAE"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405">
+        app:layout_constraintVertical_bias="0.405"
+        app:boxBackgroundColor="@color/textcardColor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
@@ -71,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/new_here"
+        android:textColor="#FFFEFE"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

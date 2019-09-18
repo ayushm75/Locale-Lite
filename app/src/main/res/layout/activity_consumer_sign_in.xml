@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConsumerSignIn">
+    tools:context=".ConsumerSignIn"
+    android:background="@drawable/b6">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,6 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
                 android:gravity="center"
+                android:textColorHint="#B3AEAE"
+                app:boxBackgroundColor="@color/textcardColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,11 +59,13 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColorHint="#B3AEAE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.479">
+                app:layout_constraintVertical_bias="0.479"
+                app:boxBackgroundColor="@color/textcardColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/caddr"
@@ -77,11 +82,13 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColorHint="#B3AEAE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.605">
+                app:layout_constraintVertical_bias="0.605"
+                app:boxBackgroundColor="@color/textcardColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/cemail"
@@ -96,11 +103,13 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColorHint="#B3AEAE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.727">
+                app:layout_constraintVertical_bias="0.727"
+                app:boxBackgroundColor="@color/textcardColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/cphone"
@@ -116,12 +125,14 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColorHint="#B3AEAE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.848"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                app:boxBackgroundColor="@color/textcardColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/cpwd"

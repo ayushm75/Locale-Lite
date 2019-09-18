@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConsumerSignIn">
+    tools:context=".ConsumerSignIn"
+    android:background="@drawable/b6">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,6 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
                 android:gravity="center"
+                android:textColorHint="#B3AEAE"
+                app:boxBackgroundColor="@color/textcardColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +59,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColorHint="#B3AEAE"
+                app:boxBackgroundColor="@color/textcardColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,6 +83,8 @@
                 app:endIconContentDescription="Get current location"
                 app:endIconDrawable="@drawable/z"
                 app:endIconMode="custom"
+                android:textColorHint="#B3AEAE"
+                app:boxBackgroundColor="@color/textcardColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,6 +104,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColorHint="#B3AEAE"
+                app:boxBackgroundColor="@color/textcardColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -116,6 +125,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColorHint="#B3AEAE"
+                app:boxBackgroundColor="@color/textcardColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -136,6 +147,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColorHint="#B3AEAE"
+                app:boxBackgroundColor="@color/textcardColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -160,37 +173,43 @@
                     android:id="@+id/doc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Doctor" />
+                    android:text="Doctor"
+                    android:textColor="#FFFFFF" />
 
                 <RadioButton
                     android:id="@+id/phar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pharmacist" />
+                    android:text="Pharmacist"
+                    android:textColor="#FFFFFF" />
 
                 <RadioButton
                     android:id="@+id/elec"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Electrician" />
+                    android:text="Electrician"
+                    android:textColor="#FFFFFF" />
 
                 <RadioButton
                     android:id="@+id/plum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Plumber" />
+                    android:text="Plumber"
+                    android:textColor="#FFFFFF" />
 
                 <RadioButton
                     android:id="@+id/carp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Carpenter" />
+                    android:text="Carpenter"
+                    android:textColor="#FFFFFF" />
 
                 <RadioButton
                     android:id="@+id/others"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Others" />
+                    android:text="Others"
+                    android:textColor="#FFFFFF" />
             </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -198,6 +217,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColorHint="#B3AEAE"
+                app:boxBackgroundColor="@color/textcardColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

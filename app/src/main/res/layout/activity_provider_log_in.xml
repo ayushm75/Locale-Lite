@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Provider_log_in">
+    tools:context=".Provider_log_in"
+    android:background="@drawable/b6">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
@@ -35,6 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
                 android:gravity="center"
+                android:textColorHint="#B3AEAE"
+                app:boxBackgroundColor="@color/textcardColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +59,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:textColorHint="#B3AEAE"
+                app:boxBackgroundColor="@color/textcardColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.848"
@@ -78,37 +83,43 @@
                     android:id="@+id/doc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Doctor" />
+                    android:text="Doctor"
+                    android:textColor="#FFF9F9" />
 
                 <RadioButton
                     android:id="@+id/phar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pharmacist" />
+                    android:text="Pharmacist"
+                    android:textColor="#FAF7F7" />
 
                 <RadioButton
                     android:id="@+id/elec"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Electrician" />
+                    android:text="Electrician"
+                    android:textColor="#FFFFFF" />
 
                 <RadioButton
                     android:id="@+id/plum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Plumber" />
+                    android:text="Plumber"
+                    android:textColor="#FFFFFF" />
 
                 <RadioButton
                     android:id="@+id/carp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Carpenter" />
+                    android:text="Carpenter"
+                    android:textColor="#FFFFFF" />
 
                 <RadioButton
                     android:id="@+id/others"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Others" />
+                    android:text="Others"
+                    android:textColor="#FFFFFF" />
             </RadioGroup>
 
             <com.google.android.material.button.MaterialButton
